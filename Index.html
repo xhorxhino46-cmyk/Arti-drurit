@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="sq" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arti i Drurit | Shtëpi Druri Premium</title>
+    
+    <!-- Google Fonts: Playfair (Elegant Serif) & Poppins (Clean Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        warmBg: '#FDF8F5',       /* Krem i ngrohtë për sfondin */
+                        woodPrimary: '#8B4513',  /* Kafe "SaddleBrown" premium */
+                        woodAccent: '#D2691E',   /* Ngjyrë toke / kanellë e ndezur */
+                        woodDark: '#3E2723',     /* Kafe shumë e errët për tekstet */
+                        gold: '#CFB53B',         /* Detaje të arta për një pamje të shtrenjtë */
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    boxShadow: {
+                        'premium': '0 20px 40px -10px rgba(139, 69, 19, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { 
+            background-color: #FDF8F5; 
+            color: #3E2723;
+        }
+        
+        .hero-bg {
+            /* Përdorim foton e kërkuar si sfond, me një hije të ngrohtë sipër për të bërë tekstin të lexueshëm */
+            background: linear-gradient(rgba(62, 39, 35, 0.6), rgba(139, 69, 19, 0.4)), url('WhatsApp Image 2026-07-30 at 7.20.43 PM.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .glass-nav {
+            background: rgba(253, 248, 245, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .hover-lift { 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        .hover-lift:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -10px rgba(139, 69, 19, 0.2);
+            border-color: #D2691E;
+        }
+
+        /* Modali për galerisë */
+        #galleryModal {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        #galleryModal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        /* Sigurohemi që fotot brenda kartave të mos deformohen */
+        .img-fit {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden">
+
+    <!-- Navigimi -->
+    <nav class="fixed w-full z-50 transition-all duration-300 py-3" id="navbar">
+        <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-4 group">
+                <img src="WhatsApp Image 2026-07-30 at 7.20.43 PM (2).jpeg" alt="Logo" class="h-16 w-16 object-cover rounded-full border-2 border-woodPrimary shadow-lg group-hover:scale-105 transition">
+                <span class="font-serif text-2xl md:text-3xl font-bold text-white transition duration-300" id="nav-logo-text">Arti i Drurit</span>
+            </a>
+            <div class="hidden lg:flex gap-8 text-white font-medium text-sm tracking-widest uppercase transition duration-300" id="nav-links">
+                <a href="#pse-ne" class="hover:text-gold transition">Pse Ne</a>
+                <a href="#druri" class="hover:text-gold transition">Druri</a>
+                <a href="#projektet" class="hover:text-gold transition">Projektet</a>
+                <a href="#cmimi" class="hover:text-gold transition">Çmimi</a>
+                <a href="#kontakt" class="hover:text-gold transition">Kontakt</a>
+            </div>
+            <a href="tel:+355697818784" class="hidden md:flex items-center gap-2 bg-woodPrimary text-white px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide hover:bg-woodAccent transition shadow-lg hover:shadow-xl">
+                <i class="fas fa-phone"></i> Kërko Ofertë
+            </a>
+        </div>
+    </nav>
+
+    <!-- Seksioni Kryesor (Hero) -->
+    <section class="hero-bg h-screen flex flex-col justify-center items-center text-center px-4 relative">
+        <div data-aos="zoom-out" data-aos-duration="1500" class="max-w-5xl mx-auto mt-20">
+            <p class="text-gold font-semibold tracking-[0.3em] uppercase mb-4 text-sm md:text-base animate-pulse">Mjeshtëri dhe Elegancë Natyrale</p>
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight drop-shadow-2xl">
+                Ndërtojmë Shtëpinë Tuaj të Ëndrrave
+            </h1>
+            <p class="text-gray-100 text-lg md:text-2xl font-light mb-12 max-w-3xl mx-auto drop-shadow-md">
+                Projektojmë dhe ndërtojmë shtëpi druri moderne në të gjithë Shqipërinë. Cilësi, izolim maksimal dhe ndërtim sipas standardeve bashkëkohore.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="#projektet" class="bg-woodPrimary text-white px-8 py-4 rounded-full uppercase text-sm font-bold tracking-widest hover:bg-woodAccent hover:-translate-y-1 transition duration-300 shadow-[0_10px_20px_rgba(139,69,19,0.3)]">
+                    Shiko Projektet
+                </a>
+                <a href="#cmimi" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full uppercase text-sm font-bold tracking-widest hover:bg-white hover:text-woodDark hover:-translate-y-1 transition duration-300">
+                    Zbulo Çmimet
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white/70">
+            <i class="fas fa-arrow-down text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- Pse Arti i Drurit -->
+    <section id="pse-ne" class="py-24 bg-warmBg relative">
+        <!-- Dekor druri ne sfond -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-woodPrimary/5 rounded-full blur-3xl -z-10"></div>
+        
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <span class="text-woodAccent font-semibold tracking-widest uppercase mb-2 block">Standardi Jonë</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-woodDark font-bold">Pse Arti i Drurit</h2>
+                <div class="w-24 h-1 bg-woodPrimary mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Kartat e veçorive me ngjyra të ngrohta -->
+                <div class="hover-lift bg-white p-10 rounded-2xl border border-orange-100 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-orange-50 text-woodAccent rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h4 class="font-serif text-2xl font-bold mb-4 text-woodDark">Gjithë Shqipëria</h4>
+                    <p class="text-gray-600 font-light">Sjellim ekipin dhe materialet kudo që keni pronën tuaj, duke mbuluar çdo cep të vendit.</p>
+                </div>
+
+                <div class="hover-lift bg-white p-10 rounded-2xl border border-orange-100 shadow-sm" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-orange-50 text-woodAccent rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h4 class="font-serif text-2xl font-bold mb-4 text-woodDark">Materiale Premium</h4>
+                    <p class="text-gray-600 font-light">Përzgjedhje rigoroze e lëndës drusore të certifikuar për jetëgjatësi maksimale.</p>
+                </div>
+
+                <div class="hover-lift bg-white p-10 rounded-2xl border border-orange-100 shadow-sm" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-orange-50 text-woodAccent rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        <i class="fas fa-temperature-empty"></i>
+                    </div>
+                    <h4 class="font-serif text-2xl font-bold mb-4 text-woodDark">Termoizolim i Plotë</h4>
+                    <p class="text-gray-600 font-light">Strukturë e dizenjuar për të ruajtur ngrohtësinë në dimër dhe freskinë në verë.</p>
+                </div>
+
+                <div class="hover-lift bg-white p-10 rounded-2xl border border-orange-100 shadow-sm" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-16 h-16 bg-orange-50 text-woodAccent rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h4 class="font-serif text-2xl font-bold mb-4 text-woodDark">Elektrike & Hidraulike</h4>
+                    <p class="text-gray-600 font-light">Instalime të fshehura, të sigurta dhe të gatshme për përdorim bashkëkohor.</p>
+                </div>
+
+                <div class="hover-lift bg-white p-10 rounded-2xl border border-orange-100 shadow-sm" data-aos="fade-up" data-aos-delay="500">
+                    <div class="w-16 h-16 bg-orange-50 text-woodAccent rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        <i class="fas fa-border-all"></i>
+                    </div>
+                    <h4 class="font-serif text-2xl font-bold mb-4 text-woodDark">Vetrata Moderne</h4>
+                    <p class="text-gray-600 font-light">Dritare të mëdha izoluese që krijojnë një lidhje të pandërprerë me natyrën.</p>
+                </div>
+
+                <div class="hover-lift bg-white p-10 rounded-2xl border border-orange-100 shadow-sm" data-aos="fade-up" data-aos-delay="600">
+                    <div class="w-16 h-16 bg-orange-50 text-woodAccent rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        <i class="fas fa-stopwatch"></i>
+                    </div>
+                    <h4 class="font-serif text-2xl font-bold mb-4 text-woodDark">Ndërtim i Shpejtë</h4>
+                    <p class="text-gray-600 font-light">Proces efikas dhe i organizuar mirë që garanton dorëzimin në kohë rekord.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seksioni: Pse Druri & Cfare Druri -->
+    <section id="druri" class="py-24 bg-white border-y border-orange-50 overflow-hidden">
+        <div class="container mx-auto px-6 md:px-12">
+            
+            <!-- Blloku 1: Pse të zgjidhni një shtëpi druri -->
+            <div class="flex flex-col lg:flex-row items-center gap-16 mb-24">
+                <div class="lg:w-1/2" data-aos="fade-right">
+                    <img src="WhatsApp Image 2026-07-30 at 7.20.43 PM (1).jpeg" alt="Interior druri" class="rounded-3xl shadow-premium w-full h-[600px] object-cover transition duration-700 hover:scale-[1.02]">
+                </div>
+                <div class="lg:w-1/2" data-aos="fade-left">
+                    <span class="text-woodAccent font-semibold tracking-widest uppercase mb-2 block">Jetë e Shëndetshme</span>
+                    <h2 class="font-serif text-4xl md:text-5xl text-woodDark font-bold mb-8">Pse të zgjidhni një shtëpi druri?</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-orange-50 p-3 rounded-full text-woodAccent mt-1"><i class="fas fa-shield-alt"></i></div>
+                            <div>
+                                <h4 class="text-xl font-serif font-bold text-woodDark mb-1">Jetëgjatësi e Lartë</h4>
+                                <p class="text-gray-600 font-light">Ndërtuar për të zgjatur mbi 80–100 vjet kur mirëmbahet saktë, ashtu si ndërtesat historike në Europë.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-orange-50 p-3 rounded-full text-woodAccent mt-1"><i class="fas fa-leaf"></i></div>
+                            <div>
+                                <h4 class="text-xl font-serif font-bold text-woodDark mb-1">Material Ekologjik</h4>
+                                <p class="text-gray-600 font-light">Dru i rinovueshëm me ndikim shumë të ulët mjedisor. Druri shërben edhe si një izolues fantastik natyral.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-orange-50 p-3 rounded-full text-woodAccent mt-1"><i class="fas fa-house-damage"></i></div>
+                            <div>
+                                <h4 class="text-xl font-serif font-bold text-woodDark mb-1">Rezistencë Sizmike</h4>
+                                <p class="text-gray-600 font-light">Fleksibiliteti natyral i jep shtëpive prej druri një mbrojtje superiore gjatë lëkundjeve të tërmeteve.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blloku 2: Cfare Druri Perdorim -->
+            <div class="flex flex-col lg:flex-row-reverse items-center gap-16">
+                <div class="lg:w-1/2 relative" data-aos="fade-left">
+                    <!-- FOTO E STRUKTURES: Ndertimi / Lamelar -->
+                    <img src="WhatsApp Image 2026-07-30 at 7.20.42 PM (5).jpeg" alt="Struktura e Drurit" class="rounded-3xl shadow-premium w-full h-[500px] object-cover transition duration-700 hover:scale-[1.02]">
+                    <div class="absolute -z-10 bg-woodPrimary/10 w-full h-full rounded-3xl top-6 -left-6 hidden md:block"></div>
+                </div>
+                <div class="lg:w-1/2" data-aos="fade-right">
+                    <span class="text-woodAccent font-semibold tracking-widest uppercase mb-2 block">Cilësia në thelb</span>
+                    <h2 class="font-serif text-4xl md:text-5xl text-woodDark font-bold mb-6">Dru Lamelar (Glulam)</h2>
+                    <p class="text-gray-600 font-light text-lg mb-8 leading-relaxed">
+                        Për të siguruar maksimumin e cilësisë, ne përdorim dru lamelar. Ky material konstruktiv është përzgjedhur për stabilitetin dhe fuqinë e tij të paprecedentë në ndërtimet moderne.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3 text-woodDark font-medium">
+                            <i class="fas fa-check-circle text-woodAccent text-xl"></i> Rezistencë e lartë mekanike.
+                        </li>
+                        <li class="flex items-center gap-3 text-woodDark font-medium">
+                            <i class="fas fa-check-circle text-woodAccent text-xl"></i> Nuk deformohet lehtë si druri masiv.
+                        </li>
+                        <li class="flex items-center gap-3 text-woodDark font-medium">
+                            <i class="fas fa-check-circle text-woodAccent text-xl"></i> Stabilitet i jashtëzakonshëm dimensional.
+                        </li>
+                        <li class="flex items-center gap-3 text-woodDark font-medium">
+                            <i class="fas fa-check-circle text-woodAccent text-xl"></i> Lejon hapësira të mëdha pa kolona të bezdisshme.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Galeria e Projekteve -->
+    <section id="projektet" class="py-24 bg-woodDark text-white relative">
+        <!-- Texture ose ngjyrë e ngrohtë sipër të zezës -->
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')] opacity-10"></div>
+        
+        <div class="container mx-auto px-6 md:px-12 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-gold font-semibold tracking-widest uppercase mb-2 block">Portofoli Jonë</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold">Galeria e Projekteve</h2>
+                <div class="w-24 h-1 bg-gold mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <!-- Grid me Foto ekzakte -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+                
+                <div class="group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-lg" data-aos="zoom-in" onclick="openModal('WhatsApp Image 2026-07-30 at 7.20.42 PM.jpeg')">
+                    <img src="WhatsApp Image 2026-07-30 at 7.20.42 PM.jpeg" alt="Projekt 1" class="img-fit group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-woodDark to-transparent opacity-0 group-hover:opacity-80 transition duration-300 flex items-end justify-center pb-8">
+                        <i class="fas fa-expand text-3xl text-gold"></i>
+                    </div>
+                </div>
+
+                <div class="group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-lg" data-aos="zoom-in" data-aos-delay="100" onclick="openModal('WhatsApp Image 2026-07-30 at 7.20.42 PM (1).jpeg')">
+                    <img src="WhatsApp Image 2026-07-30 at 7.20.42 PM (1).jpeg" alt="Projekt 2" class="img-fit group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-woodDark to-transparent opacity-0 group-hover:opacity-80 transition duration-300 flex items-end justify-center pb-8">
+                        <i class="fas fa-expand text-3xl text-gold"></i>
+                    </div>
+                </div>
+
+                <div class="group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-lg" data-aos="zoom-in" data-aos-delay="200" onclick="openModal('WhatsApp Image 2026-07-30 at 7.20.42 PM (6).jpeg')">
+                    <img src="WhatsApp Image 2026-07-30 at 7.20.42 PM (6).jpeg" alt="Projekt 3" class="img-fit group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-woodDark to-transparent opacity-0 group-hover:opacity-80 transition duration-300 flex items-end justify-center pb-8">
+                        <i class="fas fa-expand text-3xl text-gold"></i>
+                    </div>
+                </div>
+
+                <div class="group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-lg" data-aos="zoom-in" data-aos-delay="300" onclick="openModal('WhatsApp Image 2026-07-30 at 7.20.42 PM (4).jpeg')">
+                    <img src="WhatsApp Image 2026-07-30 at 7.20.42 PM (4).jpeg" alt="Projekt 4 - Montimi" class="img-fit group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-woodDark to-transparent opacity-0 group-hover:opacity-80 transition duration-300 flex items-end justify-center pb-8">
+                        <i class="fas fa-expand text-3xl text-gold"></i>
+                    </div>
+                </div>
+
+                <div class="group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-lg" data-aos="zoom-in" data-aos-delay="400" onclick="openModal('WhatsApp Image 2026-07-30 at 7.20.42 PM (2).jpeg')">
+                    <img src="WhatsApp Image 2026-07-30 at 7.20.42 PM (2).jpeg" alt="Projekt 5 - Struktura A" class="img-fit group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-woodDark to-transparent opacity-0 group-hover:opacity-80 transition duration-300 flex items-end justify-center pb-8">
+                        <i class="fas fa-expand text-3xl text-gold"></i>
+                    </div>
+                </div>
+
+                <div class="group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-lg" data-aos="zoom-in" data-aos-delay="500" onclick="openModal('WhatsApp Image 2026-07-30 at 7.20.42 PM (7).jpeg')">
+                    <img src="WhatsApp Image 2026-07-30 at 7.20.42 PM (7).jpeg" alt="Projekt 6 - Punimet" class="img-fit group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-woodDark to-transparent opacity-0 group-hover:opacity-80 transition duration-300 flex items-end justify-center pb-8">
+                        <i class="fas fa-expand text-3xl text-gold"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Modali Fullscreen për Imazhet -->
+    <div id="galleryModal" class="fixed inset-0 z-[100] bg-woodDark/95 backdrop-blur-sm flex items-center justify-center p-4 md:p-10" onclick="closeModal(event)">
+        <button onclick="closeModalBtn()" class="absolute top-6 right-8 text-white text-4xl hover:text-gold transition drop-shadow-md">&times;</button>
+        <img id="modalImg" src="" alt="Zoomed" class="max-h-full max-w-full rounded-lg shadow-2xl border-4 border-white/10" onclick="event.stopPropagation()">
+    </div>
+
+    <!-- Procesi i Punës -->
+    <section class="py-24 bg-warmBg">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <span class="text-woodAccent font-semibold tracking-widest uppercase mb-2 block">Hap pas Hapi</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-woodDark font-bold">Procesi i Punës</h2>
+                <div class="w-24 h-1 bg-woodPrimary mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center relative max-w-5xl mx-auto">
+                <!-- Vija lidhëse vizuale -->
+                <div class="hidden md:block absolute top-10 left-[10%] right-[10%] h-1 bg-orange-200 -z-10"></div>
+                
+                <div class="flex flex-col items-center w-full md:w-1/5 mb-10 md:mb-0" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-20 h-20 bg-white border-4 border-woodPrimary rounded-full flex items-center justify-center text-woodPrimary text-3xl font-serif mb-4 shadow-md font-bold">1</div>
+                    <h4 class="font-bold text-woodDark text-lg">Konsultimi</h4>
+                </div>
+                
+                <div class="flex flex-col items-center w-full md:w-1/5 mb-10 md:mb-0" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-20 h-20 bg-white border-4 border-woodPrimary rounded-full flex items-center justify-center text-woodPrimary text-3xl font-serif mb-4 shadow-md font-bold">2</div>
+                    <h4 class="font-bold text-woodDark text-lg">Projektimi</h4>
+                </div>
+                
+                <div class="flex flex-col items-center w-full md:w-1/5 mb-10 md:mb-0" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-20 h-20 bg-white border-4 border-woodPrimary rounded-full flex items-center justify-center text-woodPrimary text-3xl font-serif mb-4 shadow-md font-bold">3</div>
+                    <h4 class="font-bold text-woodDark text-lg">Prodhimi</h4>
+                </div>
+                
+                <div class="flex flex-col items-center w-full md:w-1/5 mb-10 md:mb-0" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-20 h-20 bg-white border-4 border-woodPrimary rounded-full flex items-center justify-center text-woodPrimary text-3xl font-serif mb-4 shadow-md font-bold">4</div>
+                    <h4 class="font-bold text-woodDark text-lg">Montimi</h4>
+                </div>
+                
+                <div class="flex flex-col items-center w-full md:w-1/5" data-aos="fade-up" data-aos-delay="500">
+                    <div class="w-20 h-20 bg-woodPrimary border-4 border-woodPrimary text-white rounded-full flex items-center justify-center text-3xl font-serif mb-4 shadow-lg shadow-woodPrimary/40 font-bold">5</div>
+                    <h4 class="font-bold text-woodDark text-lg">Dorëzimi</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seksioni: Çmimi Premium -->
+    <section id="cmimi" class="py-24 bg-white">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="max-w-5xl mx-auto rounded-[2.5rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(139,69,19,0.15)] flex flex-col lg:flex-row border border-orange-50" data-aos="zoom-in">
+                
+                <!-- Blloku i Cmimeve -->
+                <div class="lg:w-5/12 bg-woodPrimary text-white p-12 flex flex-col justify-center relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-2xl -mt-20 -mr-20"></div>
+                    <span class="text-orange-200 uppercase tracking-widest text-sm mb-4 font-semibold">Investimi Juaj</span>
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold mb-6">Transparencë në çdo metër.</h2>
+                    
+                    <div class="my-6">
+                        <span class="text-5xl md:text-6xl font-bold text-white">35.000</span>
+                        <span class="text-2xl text-orange-200 font-light ml-2">Lek/m²</span>
+                    </div>
+                    
+                    <p class="text-orange-100 font-light text-sm mb-8">
+                        * Për çdo projekt realizohet preventiv individual sipas sipërfaqes dhe kërkesave të klientit.
+                    </p>
+                    <a href="#kontakt" class="inline-block text-center bg-white text-woodPrimary font-bold uppercase tracking-widest py-4 px-8 rounded-full hover:bg-gold hover:text-white transition duration-300 shadow-lg">
+                        Merr Preventiv
+                    </a>
+                </div>
+                
+                <!-- Cfare Perfshihet -->
+                <div class="lg:w-7/12 bg-warmBg p-12">
+                    <h3 class="font-serif text-2xl md:text-3xl font-bold text-woodDark mb-8">Çfarë përfshihet në çmim:</h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-orange-50">
+                            <i class="fas fa-check-circle text-2xl text-woodAccent"></i>
+                            <span class="font-medium text-woodDark">Ndërtimi i Strukturës</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-orange-50">
+                            <i class="fas fa-check-circle text-2xl text-woodAccent"></i>
+                            <span class="font-medium text-woodDark">Termoizolimi i plotë</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-orange-50">
+                            <i class="fas fa-check-circle text-2xl text-woodAccent"></i>
+                            <span class="font-medium text-woodDark">Vetrata / Dritare</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-orange-50">
+                            <i class="fas fa-check-circle text-2xl text-woodAccent"></i>
+                            <span class="font-medium text-woodDark">Instalime Elektrike</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-orange-50">
+                            <i class="fas fa-check-circle text-2xl text-woodAccent"></i>
+                            <span class="font-medium text-woodDark">Instalime Hidraulike</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-orange-50">
+                            <i class="fas fa-check-circle text-2xl text-woodAccent"></i>
+                            <span class="font-medium text-woodDark">Montimi në terren</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pyetje të Shpeshta -->
+    <section class="py-24 bg-warmBg border-t border-orange-100">
+        <div class="container mx-auto px-6 md:px-12 max-w-4xl">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-woodAccent font-semibold tracking-widest uppercase mb-2 block">Informacion</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-woodDark font-bold">Pyetje të Shpeshta</h2>
+            </div>
+
+            <div class="space-y-4" data-aos="fade-up">
+                <details class="group bg-white border border-orange-100 rounded-2xl p-6 shadow-sm cursor-pointer hover:shadow-md transition">
+                    <summary class="flex justify-between items-center font-serif text-xl font-bold text-woodDark list-none">
+                        A ndërtoni në gjithë Shqipërinë?
+                        <i class="fas fa-chevron-down text-woodAccent transition-transform group-open:rotate-180"></i>
+                    </summary>
+                    <p class="mt-4 text-gray-600 font-light leading-relaxed">Po. Ne realizojmë projekte dhe montojmë shtëpi në çdo qytet apo fshat në të gjithë territorin e Shqipërisë.</p>
+                </details>
+
+                <details class="group bg-white border border-orange-100 rounded-2xl p-6 shadow-sm cursor-pointer hover:shadow-md transition">
+                    <summary class="flex justify-between items-center font-serif text-xl font-bold text-woodDark list-none">
+                        A mund të ndërtoni sipas projektit tim?
+                        <i class="fas fa-chevron-down text-woodAccent transition-transform group-open:rotate-180"></i>
+                    </summary>
+                    <p class="mt-4 text-gray-600 font-light leading-relaxed">Po. Ekipi ynë mund të punojë me projektet dhe vizatimet e vetë klientit për të realizuar dizajnin tuaj unik.</p>
+                </details>
+
+                <details class="group bg-white border border-orange-100 rounded-2xl p-6 shadow-sm cursor-pointer hover:shadow-md transition">
+                    <summary class="flex justify-between items-center font-serif text-xl font-bold text-woodDark list-none">
+                        A mund të vendoset ngrohje në dysheme?
+                        <i class="fas fa-chevron-down text-woodAccent transition-transform group-open:rotate-180"></i>
+                    </summary>
+                    <p class="mt-4 text-gray-600 font-light leading-relaxed">Absolutisht. Realizojmë instalime të fshehura dhe komplekse, duke përfshirë ngrohjen në dysheme.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Kontakt -->
+    <footer id="kontakt" class="bg-woodDark text-white pt-24 pb-12 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')] opacity-10"></div>
+        
+        <div class="container mx-auto px-6 md:px-12 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 mb-16">
+                
+                <!-- Info Kryesore -->
+                <div>
+                    <div class="flex items-center gap-4 mb-8">
+                        <img src="WhatsApp Image 2026-07-30 at 7.20.43 PM (2).jpeg" alt="Logo" class="h-16 w-16 object-cover rounded-full border-2 border-gold shadow-lg">
+                        <span class="font-serif text-3xl font-bold text-white">Arti i Drurit</span>
+                    </div>
+                    <p class="text-gray-400 font-light leading-relaxed mb-8">
+                        Mbi çdo projekt punojmë me kujdes në çdo detaj. Përdorim materiale cilësore, teknika moderne dhe ofrojmë mbështetje deri në dorëzimin e çelësave.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold hover:text-woodDark transition text-white text-xl"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold hover:text-woodDark transition text-white text-xl"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Adresa & Kontakt (Format i madh dhe i dukshem) -->
+                <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-10 bg-white/5 p-10 rounded-3xl border border-white/10">
+                    <div>
+                        <h4 class="font-serif text-2xl font-bold mb-6 text-gold">Adresa Jonë</h4>
+                        <ul class="space-y-4 text-gray-300 font-light">
+                            <li class="flex items-start gap-4">
+                                <i class="fas fa-map-marker-alt text-woodAccent mt-1 text-xl"></i>
+                                <span>
+                                    Rruga Lura, Lagjja Lura<br>
+                                    Laknas, Kamëz<br>
+                                    Rrugica e Lagjes Mitrovica<br>
+                                    Ndërtesa Nr. 2<br>
+                                    Kodi Postar: 1030
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-serif text-2xl font-bold mb-6 text-gold">Kontakt i Shpejtë</h4>
+                        <ul class="space-y-6 text-gray-300">
+                            <li class="flex items-center gap-4 group">
+                                <div class="w-12 h-12 rounded-full bg-woodAccent/20 flex items-center justify-center text-woodAccent group-hover:bg-woodAccent group-hover:text-white transition">
+                                    <i class="fas fa-phone-alt text-xl"></i>
+                                </div>
+                                <a href="tel:+355697818784" class="text-2xl font-bold text-white hover:text-gold transition">+355 69 781 8784</a>
+                            </li>
+                            <li class="flex items-center gap-4 group">
+                                <div class="w-12 h-12 rounded-full bg-woodAccent/20 flex items-center justify-center text-woodAccent group-hover:bg-woodAccent group-hover:text-white transition">
+                                    <i class="fab fa-whatsapp text-2xl"></i>
+                                </div>
+                                <span class="text-lg font-light">Na shkruani në WhatsApp</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 text-center flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 font-light text-sm">
+                <p>&copy; 2026 Arti i Drurit. Të gjitha të drejtat e rezervuara.</p>
+                <p>Ndërtuar me pasion për detajin.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inicializimi i animacioneve (AOS)
+        AOS.init({
+            once: true,
+            offset: 80,
+            duration: 1000,
+            easing: 'ease-out-cubic',
+        });
+
+        // Efekti Glassmorph në Navbar gjatë Scroll-it
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('navbar');
+            const logoText = document.getElementById('nav-logo-text');
+            const navLinks = document.getElementById('nav-links');
+            
+            if (window.scrollY > 80) {
+                nav.classList.add('glass-nav', 'shadow-md');
+                nav.classList.remove('py-3');
+                nav.classList.add('py-2');
+                
+                // Kur ka sfond të bardhë (glass), tekstet e menu-së i bëjmë të errëta
+                logoText.classList.remove('text-white');
+                logoText.classList.add('text-woodDark');
+                navLinks.classList.remove('text-white');
+                navLinks.classList.add('text-woodDark');
+            } else {
+                nav.classList.remove('glass-nav', 'shadow-md');
+                nav.classList.add('py-3');
+                nav.classList.remove('py-2');
+                
+                logoText.classList.add('text-white');
+                logoText.classList.remove('text-woodDark');
+                navLinks.classList.add('text-white');
+                navLinks.classList.remove('text-woodDark');
+            }
+        });
+
+        // Funksionet e Modals për Foton
+        function openModal(imageSrc) {
+            const modal = document.getElementById('galleryModal');
+            const modalImg = document.getElementById('modalImg');
+            modalImg.src = imageSrc;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModalBtn() {
+            const modal = document.getElementById('galleryModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; 
+        }
+
+        function closeModal(event) {
+            if (event.target.id === 'galleryModal') {
+                closeModalBtn();
+            }
+        }
+    </script>
+</body>
+</html>
